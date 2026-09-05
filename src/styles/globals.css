@@ -104,6 +104,22 @@
         }
     }
 
+    .btn-navy {
+        @apply font-semibold text-dark bg-transparent border-2 border-dark;
+
+        &:hover {
+            @apply text-paper bg-dark;
+        }
+    }
+
+    .btn-accent {
+        @apply font-semibold text-dark bg-accent border-accent;
+
+        &:hover {
+            @apply bg-accent/85;
+        }
+    }
+
     .card {
         @apply p-8 bg-paper border border-dashed border-smoke;
     }
@@ -122,18 +138,18 @@
 
     .reveal {
         opacity: 0;
-        filter: blur(40px);
-        transform: translateY(36px) scale(1.03);
+        filter: blur(18px);
+        transform: translateY(18px);
     }
 
     .reveal.show {
         transition:
-            opacity 850ms cubic-bezier(0.16, 1, 0.3, 1),
-            filter 850ms cubic-bezier(0.16, 1, 0.3, 1),
-            transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+            opacity 1100ms cubic-bezier(0.33, 1, 0.68, 1),
+            filter 1100ms cubic-bezier(0.33, 1, 0.68, 1),
+            transform 1100ms cubic-bezier(0.33, 1, 0.68, 1);
         opacity: 1;
         filter: blur(0);
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
     }
 
     @media (prefers-reduced-motion: reduce) {

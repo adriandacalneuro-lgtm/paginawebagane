@@ -164,10 +164,94 @@ const destinatariosIndirectos = [
         </div>
     </section>
 
+    <!-- Próximos eventos -->
+    <section id="eventos" class="wash scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">06 — Próximos eventos</span>
+            <h2 class="mb-10">Próximos eventos</h2>
+
+            <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,220px)_minmax(0,1fr)]">
+                <!-- Calendar -->
+                <div class="w-full max-w-[220px] p-5 bg-paper border border-smoke">
+                    <p class="font-mono text-[10px] tracking-[0.08em] text-iron uppercase">Novembro 2026</p>
+                    <div class="grid grid-cols-7 gap-y-1 mt-3 text-center">
+                        {['L', 'M', 'M', 'X', 'V', 'S', 'D'].map((d) => (
+                            <div class="font-mono text-[9px] text-ash">{d}</div>
+                        ))}
+                        {
+                            [
+                                null, null, null, null, null, null, 1,
+                                2, 3, 4, 5, 6, 7, 8,
+                                9, 10, 11, 12, 13, 14, 15,
+                                16, 17, 18, 19, 20, 21, 22,
+                                23, 24, 25, 26, 27, 28, 29,
+                                30, null, null, null, null, null, null
+                            ].map((day) => (
+                                <div class="flex items-center justify-center h-6">
+                                    <span
+                                        class:list={[
+                                            'flex items-center justify-center w-6 h-6 text-xs',
+                                            day === 14 || day === 15 ? 'bg-accent font-bold text-ink' : day ? 'text-ink' : 'text-ash'
+                                        ]}
+                                    >
+                                        {day ?? ''}
+                                    </span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <p class="pt-3 mt-3 text-xs leading-relaxed border-t text-iron border-smoke">
+                        <span class="inline-block w-2 h-2 mr-1 align-[-1px] bg-accent"></span>
+                        14–15 nov.: II Xornadas NeuroConecta
+                    </p>
+                </div>
+
+                <!-- Event details -->
+                <div class="card">
+                    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                        <div>
+                            <span class="label text-accent">14–15 novembro 2026 · A Coruña</span>
+                            <h3 class="mt-2 text-2xl">II Xornadas NeuroConecta</h3>
+                            <p class="mt-1 text-sm text-iron">Ciencia · Clínica · Comunidade</p>
+                        </div>
+                        <span class="label text-iron">#NeuroConecta2026</span>
+                    </div>
+
+                    <div class="grid gap-6 sm:grid-cols-2">
+                        <div class="pt-6 border-t border-smoke">
+                            <h4 class="mb-3 text-accent">Sábado 14</h4>
+                            <ul class="mb-4 space-y-1.5 text-sm text-iron">
+                                <li>Ponencias maxistrais</li>
+                                <li>Casos clínicos</li>
+                                <li>Debate científico</li>
+                                <li>Xunta xeral</li>
+                            </ul>
+                            <p class="label text-ink">Socios gratuíto · Non socios 50 €</p>
+                        </div>
+                        <div class="pt-6 border-t border-smoke">
+                            <h4 class="mb-3 text-accent">Domingo 15</h4>
+                            <ul class="mb-4 space-y-1.5 text-sm text-iron">
+                                <li>Obradoiros prácticos</li>
+                                <li>Formación intensiva con profesionais expertos</li>
+                                <li>4 horas · Distintas especialidades</li>
+                            </ul>
+                            <p class="label text-ink">Socios 15 € · Non socios 20 €</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-4 pt-6 mt-6 border-t border-smoke">
+                        <p class="text-sm text-iron">Cota anual de socio: 40 €</p>
+                        <a href="#faite-socio" class="btn btn-navy">Únete a AGANE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Perfil dos asociados -->
     <section class="wash scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">06 — Perfil dos asociados</span>
+            <span class="eyebrow">07 — Perfil dos asociados</span>
             <h2 class="mb-6">Perfil dos asociados</h2>
             <p class="max-w-3xl text-iron">
                 Especialistas do eido sociosanitario que desenvolven o seu labor de forma transversal en entidades sociais, actividades públicas e centros privados.
@@ -178,7 +262,7 @@ const destinatariosIndirectos = [
     <!-- Faite socio -->
     <section id="faite-socio" class="dark-band scroll-mt-16">
         <div class="py-16 text-center container-xl sm:py-24">
-            <span class="eyebrow on-dark">07 — Faite socio</span>
+            <span class="eyebrow on-dark">08 — Faite socio</span>
             <h2 class="mb-6 text-white">Faite socio ou socia de AGANE</h2>
             <p class="max-w-xl mx-auto mb-10 text-white/85">
                 Se traballas no eido sociosanitario en Galicia e queres formar parte deste espazo de debate, formación e divulgación, podes solicitar a túa incorporación a través do noso formulario.
@@ -197,7 +281,7 @@ const destinatariosIndirectos = [
     <!-- Contacto -->
     <section id="contacto" class="accent-band scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow on-accent">08 — Contacto</span>
+            <span class="eyebrow on-accent">09 — Contacto</span>
             <h2 class="mb-6">Contacto</h2>
             <p class="max-w-2xl mb-8 text-ink/80">¿Traballas no eido sociosanitario en Galicia e queres formar parte de AGANE? Escríbenos ou síguenos nas redes.</p>
             <div class="flex flex-wrap gap-4">

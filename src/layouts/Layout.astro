@@ -83,10 +83,10 @@ const {
                 if (!pre || !site) return;
 
                 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                var HOLD = 2400;
+                var HOLD = 1000;
                 var ZOOM_DURATION = 1400;
                 var BLANK_PAUSE = 250;
-                var STEP_GAP = 420;
+                var STEP_GAP = 180;
 
                 document.documentElement.style.overflow = 'hidden';
                 var release = function () {
@@ -109,7 +109,7 @@ const {
                             el.classList.add('show');
                         }, step * STEP_GAP);
                     });
-                    setTimeout(release, blocks.length * STEP_GAP + 850);
+                    setTimeout(release, blocks.length * STEP_GAP + 1100);
                 };
 
                 var hide = function () {
