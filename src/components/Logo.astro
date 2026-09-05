@@ -4,9 +4,19 @@ interface Props {
 }
 
 const { class: className = '' } = Astro.props;
+
+const letters = [
+    { char: 'A', color: 'text-dark' },
+    { char: 'G', color: 'text-accent' },
+    { char: 'A', color: 'text-accent' },
+    { char: 'N', color: 'text-dark' },
+    { char: 'E', color: 'text-dark' }
+];
 ---
 
-<div class={`flex items-center gap-4 ${className}`}>
-    <img src="/favicon.png" alt="" class="object-cover w-16 h-16 border border-ink sm:w-20 sm:h-20" />
-    <span class="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">AGANE</span>
+<div class={`flex items-center gap-3 ${className}`}>
+    <img src="/favicon.png" alt="" class="object-cover w-12 h-12 sm:w-14 sm:h-14" />
+    <span class="text-2xl font-extrabold tracking-tight sm:text-3xl">
+        {letters.map((l) => <span class={l.color}>{l.char}</span>)}
+    </span>
 </div>
