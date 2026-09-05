@@ -1,34 +1,113 @@
 ---
 import '../../src/styles/globals.css';
 import '@fontsource-variable/inter/wght.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
     title: string;
+    description?: string;
 }
 
-const { title } = Astro.props;
+const {
+    title,
+    description = 'AGANE é a Asociación Galega de Neurorrehabilitación: un espazo de debate, formación e divulgación para os profesionais do eido sociosanitario que traballan co dano cerebral adquirido e as enfermidades neurodexenerativas en Galicia.'
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="gl">
     <head>
         <meta charset="UTF-8" />
         <title>{title}</title>
+        <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin />
+        <link rel="preload" as="image" href="/images/logo-agane.jpg" />
     </head>
-    <body class="antialiased text-white bg-complementary">
-        <div class="flex flex-col min-h-screen px-6 bg-noise sm:px-12">
-            <div class="flex flex-col w-full max-w-5xl mx-auto grow">
-                <Header />
-                <main class="grow"><slot /></main>
-                <Footer />
-            </div>
+    <body class="antialiased bg-paper text-ink">
+        <div id="preloader" class="fixed inset-0 z-[999] flex items-center justify-center bg-paper" aria-hidden="true">
+            <img id="preloader-logo" src="/images/logo-agane.jpg" alt="" class="w-48 h-auto sm:w-64" />
         </div>
+        <div id="site" class="flex flex-col min-h-screen opacity-0">
+            <div class="w-full font-mono text-xs tracking-[0.08em] text-center text-ink uppercase bg-accent py-2">Asociación científica e profesional · Sen ánimo de lucro · Galicia</div>
+            <Header />
+            <main class="grow"><slot /></main>
+            <Footer />
+        </div>
+        <style>
+            #preloader.hide {
+                animation: preloaderFade 1400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            #preloader.hide #preloader-logo {
+                animation: preloaderZoom 1400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            #site.show {
+                opacity: 1;
+                transition: opacity 500ms ease-out;
+            }
+            @keyframes preloaderZoom {
+                to {
+                    transform: scale(1.35);
+                    opacity: 0;
+                }
+            }
+            @keyframes preloaderFade {
+                60% {
+                    background-color: var(--color-paper);
+                }
+                100% {
+                    background-color: transparent;
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                #preloader.hide,
+                #preloader.hide #preloader-logo {
+                    animation: none;
+                }
+            }
+        </style>
+        <script is:inline>
+            (function () {
+                var pre = document.getElementById('preloader');
+                var site = document.getElementById('site');
+                if (!pre || !site) return;
+
+                var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var HOLD = 3400;
+                var ZOOM_DURATION = 1400;
+                var BLANK_PAUSE = 250;
+
+                document.documentElement.style.overflow = 'hidden';
+                var release = function () {
+                    document.documentElement.style.overflow = '';
+                };
+
+                var reveal = function () {
+                    site.classList.add('show');
+                    release();
+                };
+
+                var hide = function () {
+                    if (reduce) {
+                        pre.remove();
+                        reveal();
+                        return;
+                    }
+                    pre.classList.add('hide');
+                    setTimeout(function () {
+                        pre.remove();
+                        setTimeout(reveal, BLANK_PAUSE);
+                    }, ZOOM_DURATION);
+                };
+
+                setTimeout(hide, reduce ? 0 : HOLD);
+            })();
+        </script>
     </body>
 </html>

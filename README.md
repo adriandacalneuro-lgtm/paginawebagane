@@ -1,43 +1,27 @@
-# Astro on Netlify Platform Starter
+# AGANE — Asociación Galega de Neurorrehabilitación
 
-[Live Demo](https://astro-platform-starter.netlify.app/)
+Web oficial de AGANE, construída con [Astro](https://astro.build) e Tailwind CSS, lista para despregar en Netlify.
 
-A modern starter based on Astro.js, Tailwind, and [Netlify Core Primitives](https://docs.netlify.com/core/overview/#develop) (Edge Functions, Image CDN, Blobs).
+## Comandos
 
-## Astro Commands
+Todos os comandos execútanse desde a raíz do proxecto, nunha terminal:
 
-All commands are run from the root of the project, from a terminal:
+| Comando           | Acción                                       |
+| :----------------- | :-------------------------------------------- |
+| `npm install`       | Instala as dependencias                       |
+| `npm run dev`       | Arranca o servidor local en `localhost:4321`  |
+| `npm run build`     | Xera a versión de produción en `./dist/`      |
+| `npm run preview`   | Previsualiza a build en local antes de publicar |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Desenvolvemento local
 
-## Deploying to Netlify
+1. Clona este repositorio e executa `npm install` na raíz.
+2. Arranca o servidor de desenvolvemento con `npm run dev`.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/astro-platform-starter)
+## Estrutura do contido
 
-## Developing Locally
+Todo o contido da páxina vive en [`src/pages/index.astro`](src/pages/index.astro) (misión, visión, valores, liñas de traballo, contacto...). Os compoñentes de cabeceira e rodapé están en `src/components/`.
 
-| Prerequisites                                                                |
-| :--------------------------------------------------------------------------- |
-| [Node.js](https://nodejs.org/) v18.20.8+.                                    |
-| (optional) [nvm](https://github.com/nvm-sh/nvm) for Node version management. |
+## Despregue
 
-1. Clone this repository, then run `npm install` in its root directory.
-
-2. Recommended: link your local repository to a Netlify project. This will ensure you're using the same runtime version for both local development and your deployed project.
-
-```
-netlify link
-```
-
-3. Run the Astro.js development server:
-
-```
-npm run dev
-```
+O proxecto está configurado co adaptador de [Netlify](https://docs.netlify.com/frameworks/astro/) e despregable directamente conectando este repositorio en Netlify.

@@ -2,29 +2,34 @@
 import Logo from '../components/Logo.astro';
 
 const navItems = [
-    { linkText: 'Home', href: '/' },
-    { linkText: 'Revalidation', href: '/revalidation' },
-    { linkText: 'Image CDN', href: '/image-cdn' },
-    { linkText: 'Edge Function', href: '/edge' },
-    { linkText: 'Blobs', href: '/blobs' }
+    { linkText: 'Quen somos', href: '#quen-somos' },
+    { linkText: 'Misión e visión', href: '#mision-vision' },
+    { linkText: 'Valores', href: '#valores' },
+    { linkText: 'Liñas de traballo', href: '#lineas-traballo' },
+    { linkText: 'Contacto', href: '#contacto' }
 ];
+
+const membershipFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeo0hy-RgPpW85MApm6Zzgtgq8kTk82u757hnAWgMHbCZJCZA/viewform';
 ---
 
-<nav class="flex flex-wrap items-center gap-4 pt-6 pb-16 sm:pt-12 sm:pb-24">
-    <a href="/">
-        <Logo />
-    </a>
-    {
-        !!navItems?.length && (
-            <ul class="flex flex-wrap gap-x-4 gap-y-1">
-                {navItems.map((item) => (
-                    <li>
-                        <a href={item.href} class="inline-block px-1.5 py-1 sm:px-3 sm:py-2">
-                            {item.linkText}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        )
-    }
-</nav>
+<header class="w-full bg-paper hairline-b">
+    <nav class="flex flex-wrap items-center justify-between gap-4 py-5 container-xl">
+        <a href="/" class="shrink-0 no-underline">
+            <Logo />
+        </a>
+        {
+            !!navItems?.length && (
+                <ul class="flex flex-wrap gap-x-1 gap-y-1">
+                    {navItems.map((item) => (
+                        <li>
+                            <a href={item.href} class="inline-block px-2 py-1 no-underline label hover:text-accent sm:px-3">
+                                {item.linkText}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
+        <a href={membershipFormUrl} target="_blank" rel="noopener noreferrer" class="btn btn-dark shrink-0">Faite socio/a</a>
+    </nav>
+</header>

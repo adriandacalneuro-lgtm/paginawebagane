@@ -1,19 +1,209 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+const valores = [
+    {
+        titulo: 'Cooperación público-privada',
+        texto: 'Cremos firmemente que a clave do éxito asistencial radica na colaboración entre as institucións e o tecido clínico, en beneficio da comunidade.'
+    },
+    {
+        titulo: 'Rigor científico',
+        texto: 'O coñecemento actualizado e a práctica baseada na evidencia como base de toda intervención.'
+    },
+    {
+        titulo: 'Transversalidade',
+        texto: 'Os nosos profesionais desenvolven o seu labor diario de forma transversal, tanto en entidades sociais e actividades públicas como en centros privados.'
+    },
+    {
+        titulo: 'Atención integral',
+        texto: 'A persoa no centro, máis alá do diagnóstico: aspectos clínicos, funcionais, sociais e familiares.'
+    },
+    {
+        titulo: 'Sen ánimo de lucro',
+        texto: 'Todo o esforzo revértese na comunidade profesional e nas persoas atendidas.'
+    }
+];
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const lineasTraballo = [
+    {
+        titulo: 'Debate',
+        texto: 'Un foro estable no que compartir experiencia, contrastar criterios e poñer en común os retos reais da práctica diaria.'
+    },
+    {
+        titulo: 'Formación',
+        texto: 'Actualización científica continuada e intercambio de coñecemento entre profesionais.'
+    },
+    {
+        titulo: 'Divulgación',
+        texto: 'Visibilizar a realidade do dano cerebral adquirido e das enfermidades neurodexenerativas en Galicia, dentro e fóra do sector.'
+    },
+    {
+        titulo: 'Conexión',
+        texto: 'Tecer rede entre especialistas que traballan en contornas públicas, privadas e do terceiro sector, hoxe moitas veces illados entre si.'
+    },
+    {
+        titulo: 'Cooperación institucional',
+        texto: 'Impulso de proxectos e alianzas entre o ámbito público e o privado.'
+    }
+];
+
+const destinatariosIndirectos = [
+    'Persoas con dano cerebral adquirido (ictus, traumatismo craneoencefálico, anoxia, tumores, entre outras etioloxías).',
+    'Persoas con enfermidades neurodexenerativas.',
+    'Familias e persoas coidadoras.',
+    'Entidades sociais, centros clínicos e administracións públicas.'
+];
 ---
 
-<Layout title="Welcome to Astro.">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title="AGANE — Asociación Galega de Neurorrehabilitación">
+    <!-- Hero -->
+    <section class="dark-band">
+        <div class="py-20 container-xl sm:py-32">
+            <span class="eyebrow on-dark">Asociación científica e profesional</span>
+            <h1 class="max-w-3xl mb-8 text-white">Asociación Galega de Neurorrehabilitación</h1>
+            <p class="max-w-xl mb-10 text-lg text-white/85">
+                Unha asociación científica e profesional sen ánimo de lucro que agrupa a especialistas do eido sociosanitario en Galicia, coa vocación de mellorar a calidade de vida e a atención integral das persoas
+                con dano cerebral adquirido (DCA) ou enfermidades neurodexenerativas.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#contacto" class="btn btn-light">Contacta con nós</a>
+                <a href="https://www.instagram.com/agane.gal/" target="_blank" rel="noopener noreferrer" class="btn btn-light">Séguenos en Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quen somos -->
+    <section id="quen-somos" class="bg-paper scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">01 — Quen somos</span>
+            <h2 class="max-w-3xl mb-8">Quen somos</h2>
+            <div class="max-w-3xl space-y-5 text-iron">
+                <p>AGANE (Asociación Galega de Neurorrehabilitación) é unha asociación científica e profesional sen ánimo de lucro que agrupa a especialistas do eido sociosanitario en Galicia.</p>
+                <p>
+                    Nace como un <strong class="text-ink">espazo de debate, formación e divulgación</strong> que conecte aos profesionais que traballamos neste campo, coa firme vocación de mellorar a calidade de vida
+                    e a atención integral das persoas con dano cerebral adquirido (DCA) ou enfermidades neurodexenerativas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misión e Visión -->
+    <section id="mision-vision" class="wash scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">02 — Misión e visión</span>
+            <h2 class="mb-10">Misión e visión</h2>
+            <div class="grid gap-6 md:grid-cols-2">
+                <div class="card">
+                    <h3 class="mb-3 text-accent">Misión</h3>
+                    <p class="text-iron">
+                        Crear un espazo común de debate, formación e divulgación que conecte aos profesionais do eido sociosanitario galego, para mellorar a calidade de vida e a atención integral das persoas con dano
+                        cerebral adquirido ou enfermidades neurodexenerativas, así como das súas familias e contornas de coidado.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 class="mb-3 text-accent">Visión</h3>
+                    <p class="text-iron">
+                        Un modelo asistencial galego no que institucións públicas e tecido clínico privado camiñan da man, garantindo unha atención continuada, especializada e accesible en todo o territorio.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores -->
+    <section id="valores" class="bg-paper scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">03 — Valores</span>
+            <h2 class="mb-10">Valores</h2>
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {
+                    valores.map((valor) => (
+                        <div class="card">
+                            <h3 class="mb-2">{valor.titulo}</h3>
+                            <p class="text-sm text-iron">{valor.texto}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- A quen nos diriximos -->
+    <section class="wash scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">04 — A quen nos diriximos</span>
+            <h2 class="mb-8">A quen nos diriximos</h2>
+            <div class="max-w-3xl space-y-5 text-iron">
+                <p>
+                    <strong class="text-ink">En primeiro lugar, aos profesionais.</strong> AGANE é, ante todo, un punto de encontro para os especialistas do eido sociosanitario que traballamos co dano cerebral adquirido
+                    e coas enfermidades neurodexenerativas en Galicia: profesionais de entidades sociais, do ámbito público e de centros privados.
+                </p>
+                <p>De forma indirecta, o noso traballo repercute en:</p>
+                <ul class="pl-5 space-y-2 list-disc marker:text-accent">
+                    {destinatariosIndirectos.map((item) => <li>{item}</li>)}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liñas de traballo -->
+    <section id="lineas-traballo" class="bg-paper scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">05 — Liñas de traballo</span>
+            <h2 class="mb-10">Liñas de traballo</h2>
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {
+                    lineasTraballo.map((linea) => (
+                        <div class="card">
+                            <h3 class="mb-2">{linea.titulo}</h3>
+                            <p class="text-sm text-iron">{linea.texto}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfil dos asociados -->
+    <section class="wash scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">06 — Perfil dos asociados</span>
+            <h2 class="mb-6">Perfil dos asociados</h2>
+            <p class="max-w-3xl text-iron">
+                Especialistas do eido sociosanitario que desenvolven o seu labor de forma transversal en entidades sociais, actividades públicas e centros privados.
+            </p>
+        </div>
+    </section>
+
+    <!-- Faite socio -->
+    <section id="faite-socio" class="dark-band scroll-mt-16">
+        <div class="py-16 text-center container-xl sm:py-24">
+            <span class="eyebrow on-dark">07 — Faite socio</span>
+            <h2 class="mb-6 text-white">Faite socio ou socia de AGANE</h2>
+            <p class="max-w-xl mx-auto mb-10 text-white/85">
+                Se traballas no eido sociosanitario en Galicia e queres formar parte deste espazo de debate, formación e divulgación, podes solicitar a túa incorporación a través do noso formulario.
+            </p>
+            <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeo0hy-RgPpW85MApm6Zzgtgq8kTk82u757hnAWgMHbCZJCZA/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-light btn-lg"
+            >
+                Solicitar alta como socio/a
+            </a>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="accent-band scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow on-accent">08 — Contacto</span>
+            <h2 class="mb-6">Contacto</h2>
+            <p class="max-w-2xl mb-8 text-ink/80">¿Traballas no eido sociosanitario en Galicia e queres formar parte de AGANE? Escríbenos ou síguenos nas redes.</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="mailto:info.agane@gmail.com" class="btn btn-dark">info.agane@gmail.com</a>
+                <a href="https://www.instagram.com/agane.gal/" target="_blank" rel="noopener noreferrer" class="btn btn-dark">@agane.gal</a>
+            </div>
+        </div>
+    </section>
 </Layout>
