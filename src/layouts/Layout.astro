@@ -34,8 +34,10 @@ const {
         <div id="preloader" class="fixed inset-0 z-[999] flex items-center justify-center bg-paper" aria-hidden="true">
             <img id="preloader-logo" src="/images/logo-agane.jpg" alt="" class="w-48 h-auto sm:w-64" />
         </div>
-        <div id="site" class="flex flex-col min-h-screen opacity-0">
-            <div class="w-full font-mono text-xs tracking-[0.08em] text-center text-ink uppercase bg-accent py-2">Asociación científica e profesional · Sen ánimo de lucro · Galicia</div>
+        <div id="site" class="flex flex-col min-h-screen">
+            <div class="reveal w-full font-mono text-xs tracking-[0.08em] text-center text-ink uppercase bg-accent py-2" data-step="0">
+                Asociación científica e profesional · Sen ánimo de lucro · Galicia
+            </div>
             <Header />
             <main class="grow"><slot /></main>
             <Footer />
@@ -47,9 +49,11 @@ const {
             #preloader.hide #preloader-logo {
                 animation: preloaderZoom 1400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
             }
+            #site {
+                opacity: 0;
+            }
             #site.show {
                 opacity: 1;
-                transition: opacity 500ms ease-out;
             }
             @keyframes preloaderZoom {
                 to {
@@ -82,6 +86,7 @@ const {
                 var HOLD = 2400;
                 var ZOOM_DURATION = 1400;
                 var BLANK_PAUSE = 250;
+                var STEP_GAP = 420;
 
                 document.documentElement.style.overflow = 'hidden';
                 var release = function () {
@@ -90,7 +95,21 @@ const {
 
                 var reveal = function () {
                     site.classList.add('show');
-                    release();
+                    var blocks = site.querySelectorAll('.reveal');
+                    if (reduce) {
+                        blocks.forEach(function (el) {
+                            el.classList.add('show');
+                        });
+                        release();
+                        return;
+                    }
+                    blocks.forEach(function (el) {
+                        var step = parseInt(el.getAttribute('data-step') || '0', 10);
+                        setTimeout(function () {
+                            el.classList.add('show');
+                        }, step * STEP_GAP);
+                    });
+                    setTimeout(release, blocks.length * STEP_GAP + 850);
                 };
 
                 var hide = function () {

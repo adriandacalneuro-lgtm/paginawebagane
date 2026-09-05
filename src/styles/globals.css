@@ -119,4 +119,26 @@
     .hairline-b {
         @apply border-b border-ink;
     }
+
+    .reveal {
+        opacity: 0;
+        filter: blur(40px);
+        transform: translateY(36px) scale(1.03);
+    }
+
+    .reveal.show {
+        transition:
+            opacity 850ms cubic-bezier(0.16, 1, 0.3, 1),
+            filter 850ms cubic-bezier(0.16, 1, 0.3, 1),
+            transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0) scale(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .reveal.show {
+            transition: none;
+        }
+    }
 }
