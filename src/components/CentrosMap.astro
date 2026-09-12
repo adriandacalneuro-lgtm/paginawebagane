@@ -1,0 +1,153 @@
+---
+import 'leaflet/dist/leaflet.css';
+import { centros } from '../data/centros';
+---
+
+<div class="w-full h-[420px] border border-ink" id="centros-map" data-centros={JSON.stringify(centros)}></div>
+<div class="flex flex-wrap gap-x-6 gap-y-2 pt-3 font-mono text-xs text-iron">
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-2.5 h-2.5 border border-ink bg-accent"></span>Centros asociados</span>
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-2.5 h-2.5 border border-ink bg-dark"></span>Centros públicos de referencia</span>
+</div>
+
+<script>
+    import L from 'leaflet';
+
+    interface Centro {
+        nome: string;
+        enderezo: string;
+        lat: number;
+        lng: number;
+        telefono?: string;
+        web?: string;
+        redes?: { label: string; url: string }[];
+        tipo?: 'publico';
+    }
+
+    const iconAsociado = L.divIcon({
+        className: 'agane-pin agane-pin-asociado',
+        html: '<span></span>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
+        popupAnchor: [0, -10]
+    });
+
+    const iconPublico = L.divIcon({
+        className: 'agane-pin agane-pin-publico',
+        html: '<span>+</span>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
+        popupAnchor: [0, -10]
+    });
+
+    function popupHtml(c: Centro): string {
+        const lines = [`<strong>${c.nome}</strong>`, c.enderezo];
+        if (c.telefono) {
+            lines.push(`<a href="tel:${c.telefono.replace(/\s+/g, '')}">${c.telefono}</a>`);
+        }
+        if (c.web) {
+            lines.push(`<a href="${c.web}" target="_blank" rel="noopener noreferrer">${c.web.replace(/^https?:\/\//, '')}</a>`);
+        }
+        if (c.redes?.length) {
+            const links = c.redes.map((r) => `<a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.label}</a>`).join(' · ');
+            lines.push(links);
+        }
+        return `<div class="centro-popup">${lines.join('<br>')}</div>`;
+    }
+
+    const el = document.getElementById('centros-map') as (HTMLElement & { _aganeMapInit?: boolean }) | null;
+    if (el && !el._aganeMapInit) {
+        el._aganeMapInit = true;
+        const centros: Centro[] = JSON.parse(el.dataset.centros || '[]');
+
+        const map = L.map(el, { scrollWheelZoom: false, zoomControl: false }).setView([42.6, -8.0], 8);
+        L.control.zoom({ position: 'topright' }).addTo(map);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 19
+        }).addTo(map);
+
+        const markers = centros.map((c) =>
+            L.marker([c.lat, c.lng], { icon: c.tipo === 'publico' ? iconPublico : iconAsociado })
+                .addTo(map)
+                .bindPopup(popupHtml(c))
+        );
+
+        if (markers.length === 1) {
+            map.setView([centros[0].lat, centros[0].lng], 13);
+        } else if (markers.length > 1) {
+            const group = L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.25), { maxZoom: 12 });
+        }
+    }
+</script>
+
+<style is:global>
+    #centros-map {
+        background: #eef0f1;
+    }
+
+    #centros-map .leaflet-tile-pane {
+        filter: grayscale(1) contrast(1.15) brightness(1.12);
+    }
+
+    .agane-pin span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border: 1.5px solid #000;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+    }
+
+    .agane-pin-asociado span {
+        background: #f66723;
+    }
+
+    .agane-pin-publico span {
+        background: #123e63;
+    }
+
+    .leaflet-control-zoom {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+
+    .leaflet-control-zoom a {
+        background: #fff !important;
+        color: #000 !important;
+        font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .leaflet-control-zoom a:hover {
+        background: #000 !important;
+        color: #fff !important;
+    }
+
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+        border-radius: 0 !important;
+        border: 1px solid #000;
+        box-shadow: none !important;
+    }
+
+    .leaflet-popup-content {
+        font-family: 'Inter Variable', ui-sans-serif, sans-serif;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .leaflet-container {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+    }
+
+    .leaflet-control-attribution {
+        background: rgba(255, 255, 255, 0.85) !important;
+    }
+</style>

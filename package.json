@@ -15,6 +15,7 @@
         "@fontsource/ibm-plex-mono": "^5.3.0",
         "@tailwindcss/vite": "^4.3.1",
         "astro": "^7.0.1",
+        "leaflet": "^1.9.4",
         "tailwindcss": "^4.3.1"
     },
     "devDependencies": {
