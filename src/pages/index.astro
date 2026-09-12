@@ -1,7 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CentrosMap from '../components/CentrosMap.astro';
-import { centrosAsociados, centrosPublicos } from '../data/centros';
+import { centros, provincias } from '../data/centros';
+
+const centrosPorProvincia = provincias.map((provincia) => ({
+    provincia,
+    centros: centros.filter((c) => c.provincia === provincia).sort((a, b) => a.nome.localeCompare(b.nome))
+}));
 
 const valores = [
     {
@@ -89,10 +94,38 @@ const destinatariosIndirectos = [
         </div>
     </section>
 
+    <!-- Xunta directiva -->
+    <section id="xunta-directiva" class="wash scroll-mt-16">
+        <div class="py-16 container-xl sm:py-24">
+            <span class="eyebrow">02 — Xunta directiva</span>
+            <h2 class="mb-10">Xunta directiva</h2>
+            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)]">
+                <img src="/images/xunta-directiva.jpg" alt="Xunta directiva de AGANE" class="object-cover w-full border border-ink max-h-[520px]" />
+                <ul class="space-y-4">
+                    {
+                        [
+                            { cargo: 'Presidente', nome: 'Pablo Bouza Bernárdez', profesion: 'Fisioterapeuta' },
+                            { cargo: 'Vicepresidenta', nome: 'Paula Campos Fernández', profesion: 'Fisioterapeuta' },
+                            { cargo: 'Secretaria', nome: 'María Feijóo García', profesion: 'Fisioterapeuta' },
+                            { cargo: 'Tesoureiro', nome: 'Alejandro Martínez Tejedor', profesion: 'Fisioterapeuta' },
+                            { cargo: 'Vogal', nome: 'Adrián Dacal Rodríguez', profesion: 'Fisioterapeuta' }
+                        ].map((membro) => (
+                            <li class="p-4 bg-paper border border-dashed border-smoke">
+                                <p class="label text-accent">{membro.cargo}</p>
+                                <p class="mt-1 font-bold">{membro.nome}</p>
+                                <p class="text-sm text-iron">{membro.profesion}</p>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Misión e Visión -->
     <section id="mision-vision" class="wash scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">02 — Misión e visión</span>
+            <span class="eyebrow">03 — Misión e visión</span>
             <h2 class="mb-10">Misión e visión</h2>
             <div class="grid gap-6 md:grid-cols-2">
                 <div class="card">
@@ -115,7 +148,7 @@ const destinatariosIndirectos = [
     <!-- Valores -->
     <section id="valores" class="bg-paper scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">03 — Valores</span>
+            <span class="eyebrow">04 — Valores</span>
             <h2 class="mb-10">Valores</h2>
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {
@@ -133,7 +166,7 @@ const destinatariosIndirectos = [
     <!-- A quen nos diriximos -->
     <section class="wash scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">04 — A quen nos diriximos</span>
+            <span class="eyebrow">05 — A quen nos diriximos</span>
             <h2 class="mb-8">A quen nos diriximos</h2>
             <div class="max-w-3xl space-y-5 text-iron">
                 <p>
@@ -151,7 +184,7 @@ const destinatariosIndirectos = [
     <!-- Liñas de traballo -->
     <section id="lineas-traballo" class="bg-paper scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">05 — Liñas de traballo</span>
+            <span class="eyebrow">06 — Liñas de traballo</span>
             <h2 class="mb-10">Liñas de traballo</h2>
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {
@@ -169,7 +202,7 @@ const destinatariosIndirectos = [
     <!-- Próximos eventos -->
     <section id="eventos" class="wash scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">06 — Próximos eventos</span>
+            <span class="eyebrow">07 — Próximos eventos</span>
             <h2 class="mb-10">Próximos eventos</h2>
 
             <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,220px)_minmax(0,1fr)]">
@@ -247,66 +280,68 @@ const destinatariosIndirectos = [
                     </div>
                 </div>
             </div>
+
+            <div class="pt-10 mt-10 border-t border-smoke">
+                <p class="label text-accent">Edición anterior</p>
+                <img src="/images/neuroconecta-2025.jpg" alt="Participantes na I Xornadas NeuroConecta 2025" class="object-cover w-full mt-4 border border-ink max-h-[420px]" />
+                <p class="mt-3 text-sm text-iron">Así foi a I Xornadas NeuroConecta 2025, o encontro que deu orixe a esta cita anual.</p>
+            </div>
         </div>
     </section>
 
     <!-- Centros asociados -->
     <section id="centros" class="bg-paper scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">07 — Centros asociados</span>
+            <span class="eyebrow">08 — Centros asociados</span>
             <h2 class="mb-4">Centros asociados</h2>
-            <p class="max-w-2xl mb-10 text-iron">Atopa un centro de referencia preto de ti. Estes son os centros vinculados a profesionais asociados a AGANE.</p>
+            <p class="max-w-2xl mb-10 text-iron">Atopa un centro de referencia preto de ti: centros vinculados a profesionais asociados a AGANE e principais hospitais públicos, organizados por provincia.</p>
 
-            <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,320px)]">
-                <CentrosMap />
-                <ul class="space-y-4 max-h-[600px] overflow-y-auto pr-1">
-                    {
-                        centrosAsociados.map((centro) => (
-                            <li class="flex gap-4 p-5 bg-paper border border-dashed border-smoke">
-                                {centro.logo && <img src={centro.logo} alt={`Logo de ${centro.nome}`} class="object-contain flex-shrink-0 w-12 h-12 border border-smoke" />}
-                                <div>
-                                    <p class="font-bold">{centro.nome}</p>
-                                    <p class="mt-1 text-sm text-iron">{centro.enderezo}</p>
-                                {centro.telefono && (
-                                    <p class="mt-2 text-sm">
-                                        <a href={`tel:${centro.telefono.replace(/\s+/g, '')}`} class="text-dark hover:text-accent">
-                                            {centro.telefono}
-                                        </a>
-                                    </p>
-                                )}
-                                {(centro.web || centro.redes?.length) && (
-                                    <p class="flex flex-wrap gap-x-3 mt-1 text-sm">
-                                        {centro.web && (
-                                            <a href={centro.web} target="_blank" rel="noopener noreferrer" class="text-dark hover:text-accent">
-                                                {centro.web.replace(/^https?:\/\//, '')}
-                                            </a>
+            <CentrosMap />
+
+            <div class="grid gap-8 pt-10 mt-10 border-t border-smoke sm:grid-cols-2">
+                {
+                    centrosPorProvincia.map(({ provincia, centros: lista }) => (
+                        <div>
+                            <p class="mb-4 label text-accent">{provincia}</p>
+                            <ul class="space-y-3">
+                                {lista.map((centro) => (
+                                    <li class="flex gap-3 p-4 bg-paper border border-dashed border-smoke">
+                                        {centro.logo ? (
+                                            <img src={centro.logo} alt={`Logo de ${centro.nome}`} class="object-contain flex-shrink-0 w-10 h-10 border border-smoke" />
+                                        ) : (
+                                            <span class:list={['flex-shrink-0 w-2.5 h-2.5 mt-1.5 border border-ink', centro.tipo === 'publico' ? 'bg-dark' : 'bg-accent']} />
                                         )}
-                                        {centro.redes?.map((r) => (
-                                            <a href={r.url} target="_blank" rel="noopener noreferrer" class="text-dark hover:text-accent">
-                                                {r.label}
-                                            </a>
-                                        ))}
-                                    </p>
-                                )}
-                                </div>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
-
-            <div class="pt-10 mt-10 border-t border-smoke">
-                <p class="label text-iron">Centros públicos de referencia</p>
-                <ul class="grid gap-3 mt-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {
-                        centrosPublicos.map((centro) => (
-                            <li class="p-4 text-sm border border-dashed border-smoke">
-                                <p class="font-bold">{centro.nome}</p>
-                                <p class="mt-1 text-iron">{centro.enderezo}</p>
-                            </li>
-                        ))
-                    }
-                </ul>
+                                        <div>
+                                            <p class="font-bold leading-snug">{centro.nome}</p>
+                                            <p class="mt-1 text-sm text-iron">{centro.enderezo}</p>
+                                            {centro.telefono && (
+                                                <p class="mt-1.5 text-sm">
+                                                    <a href={`tel:${centro.telefono.replace(/\s+/g, '')}`} class="text-dark hover:text-accent">
+                                                        {centro.telefono}
+                                                    </a>
+                                                </p>
+                                            )}
+                                            {(centro.web || centro.redes?.length) && (
+                                                <p class="flex flex-wrap mt-1 text-sm gap-x-3">
+                                                    {centro.web && (
+                                                        <a href={centro.web} target="_blank" rel="noopener noreferrer" class="text-dark hover:text-accent">
+                                                            {centro.web.replace(/^https?:\/\//, '')}
+                                                        </a>
+                                                    )}
+                                                    {centro.redes?.map((r) => (
+                                                        <a href={r.url} target="_blank" rel="noopener noreferrer" class="text-dark hover:text-accent">
+                                                            {r.label}
+                                                        </a>
+                                                    ))}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     </section>
@@ -314,7 +349,7 @@ const destinatariosIndirectos = [
     <!-- Perfil dos asociados -->
     <section class="wash scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow">08 — Perfil dos asociados</span>
+            <span class="eyebrow">09 — Perfil dos asociados</span>
             <h2 class="mb-6">Perfil dos asociados</h2>
             <p class="max-w-3xl text-iron">
                 Especialistas do eido sociosanitario que desenvolven o seu labor de forma transversal en entidades sociais, actividades públicas e centros privados.
@@ -325,7 +360,7 @@ const destinatariosIndirectos = [
     <!-- Faite socio -->
     <section id="faite-socio" class="dark-band scroll-mt-16">
         <div class="py-16 text-center container-xl sm:py-24">
-            <span class="eyebrow on-dark">09 — Faite socio</span>
+            <span class="eyebrow on-dark">10 — Faite socio</span>
             <h2 class="mb-6 text-white">Faite socio ou socia de AGANE</h2>
             <p class="max-w-xl mx-auto mb-10 text-white/85">
                 Se traballas no eido sociosanitario en Galicia e queres formar parte deste espazo de debate, formación e divulgación, podes solicitar a túa incorporación a través do noso formulario.
@@ -344,7 +379,7 @@ const destinatariosIndirectos = [
     <!-- Contacto -->
     <section id="contacto" class="accent-band scroll-mt-16">
         <div class="py-16 container-xl sm:py-24">
-            <span class="eyebrow on-accent">10 — Contacto</span>
+            <span class="eyebrow on-accent">11 — Contacto</span>
             <h2 class="mb-6">Contacto</h2>
             <p class="max-w-2xl mb-8 text-ink/80">¿Traballas no eido sociosanitario en Galicia e queres formar parte de AGANE? Escríbenos ou síguenos nas redes.</p>
             <div class="flex flex-wrap gap-4">
