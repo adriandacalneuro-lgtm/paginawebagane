@@ -276,7 +276,10 @@ const destinatariosIndirectos = [
 
                     <div class="flex flex-wrap items-center justify-between gap-4 pt-6 mt-6 border-t border-smoke">
                         <p class="text-sm text-iron">Cota anual de socio: 40 €</p>
-                        <a href="#faite-socio" class="btn btn-navy">Únete a AGANE</a>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://docs.google.com/forms/d/1Qe7f6mZTWs1ScVpXf6d59n_IOR9ZQqS22qF4mYzovTQ/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-dark">Apúntate ás Xornadas</a>
+                            <a href="#faite-socio" class="btn btn-navy">Únete a AGANE</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -298,20 +301,20 @@ const destinatariosIndirectos = [
 
             <CentrosMap />
 
-            <div class="grid gap-8 pt-10 mt-10 border-t border-smoke sm:grid-cols-2">
+            <div class="grid min-w-0 gap-8 pt-10 mt-10 border-t border-smoke sm:grid-cols-2">
                 {
                     centrosPorProvincia.map(({ provincia, centros: lista }) => (
-                        <div>
+                        <div class="min-w-0">
                             <p class="mb-4 label text-accent">{provincia}</p>
                             <ul class="space-y-3">
                                 {lista.map((centro) => (
-                                    <li class="flex gap-3 p-4 bg-paper border border-dashed border-smoke">
+                                    <li class="flex min-w-0 gap-3 p-4 bg-paper border border-dashed border-smoke">
                                         {centro.logo ? (
                                             <img src={centro.logo} alt={`Logo de ${centro.nome}`} class="object-contain flex-shrink-0 w-10 h-10 border border-smoke" />
                                         ) : (
                                             <span class:list={['flex-shrink-0 w-2.5 h-2.5 mt-1.5 border border-ink', centro.tipo === 'publico' ? 'bg-dark' : 'bg-accent']} />
                                         )}
-                                        <div>
+                                        <div class="min-w-0">
                                             <p class="font-bold leading-snug">{centro.nome}</p>
                                             <p class="mt-1 text-sm text-iron">{centro.enderezo}</p>
                                             {centro.telefono && (
@@ -322,7 +325,7 @@ const destinatariosIndirectos = [
                                                 </p>
                                             )}
                                             {(centro.web || centro.redes?.length) && (
-                                                <p class="flex flex-wrap mt-1 text-sm gap-x-3">
+                                                <p class="flex flex-wrap mt-1 text-sm break-all gap-x-3">
                                                     {centro.web && (
                                                         <a href={centro.web} target="_blank" rel="noopener noreferrer" class="text-dark hover:text-accent">
                                                             {centro.web.replace(/^https?:\/\//, '')}

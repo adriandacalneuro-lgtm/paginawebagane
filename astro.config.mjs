@@ -7,9 +7,5 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()]
     },
-    adapter: netlify({
-        devFeatures: {
-            environmentVariables: true
-        }
-    })
+    adapter: netlify()
 });
