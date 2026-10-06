@@ -287,7 +287,8 @@ export const centrosAsociados: Centro[] = [
         lat: 42.6091733,
         lng: -7.7688664,
         telefono: '621 200 890',
-        redes: [{ label: 'Instagram', url: 'https://www.instagram.com/neurosinais/' }]
+        redes: [{ label: 'Instagram', url: 'https://www.instagram.com/neurosinais/' }],
+        logo: '/images/centros/neurosinais.jpg'
     },
     {
         nome: 'Neurosaúde',
@@ -299,6 +300,17 @@ export const centrosAsociados: Centro[] = [
         web: 'https://neurosaude.es/',
         redes: [{ label: 'Instagram', url: 'https://www.instagram.com/neurosaudeag' }],
         logo: '/images/centros/neurosaude.png'
+    },
+    {
+        nome: 'UARA — Neurorrehabilitación infantil e adultos',
+        enderezo: 'Galerías Centro Azul, 14 (Rúa Joaquín Costa, 19), 36001 Pontevedra',
+        provincia: 'Pontevedra',
+        lat: 42.4287428,
+        lng: -8.6407174,
+        telefono: '613 72 00 79',
+        web: 'https://uara-neuro.es/',
+        redes: [{ label: 'Instagram', url: 'https://www.instagram.com/uara_neuro/' }],
+        logo: '/images/centros/uara-neuro.jpg'
     }
 ];
 
