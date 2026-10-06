@@ -310,7 +310,7 @@ const destinatariosIndirectos = [
                                 {lista.map((centro) => (
                                     <li class="flex min-w-0 gap-3 p-4 bg-paper border border-dashed border-smoke">
                                         {centro.logo ? (
-                                            <img src={centro.logo} alt={`Logo de ${centro.nome}`} class="object-contain flex-shrink-0 w-10 h-10 border border-smoke" />
+                                            <img src={centro.logo} alt={`Logo de ${centro.nome}`} class="object-contain flex-shrink-0 w-10 h-10" />
                                         ) : (
                                             <span class:list={['flex-shrink-0 w-2.5 h-2.5 mt-1.5 border border-ink', centro.tipo === 'publico' ? 'bg-dark' : 'bg-accent']} />
                                         )}
